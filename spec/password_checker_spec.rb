@@ -13,7 +13,16 @@ RSpec.describe PasswordChecker do
   end
 
   it "return true if password length is 8 or greater" do
-    
+    checker = PasswordChecker.new
+    ['asdfghjk', 'sdakjfhsdilufhds', 'sdjhnvkajnxoue'].each do |password|
+      expect(checker.check(password)).to eq true
+    end
   end
 
+  it "Fails if password length is less than 8" do
+    checker = PasswordChecker.new
+    ['asdf', 'hjkl', 'ff'].each do |password|
+      expect { checker.check(password) }.to raise_error "Invalid password, must be 8+ characters."
+    end
+  end
 end
